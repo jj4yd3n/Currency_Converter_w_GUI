@@ -1,8 +1,13 @@
 public class currencyConvert {
-    public Double convertToCAD(int x, Double y){
-         x = 0;
-         y = 1.44;
-        return (double) (x * y);
+    private Double val;
+    public currencyConvert(Double val) {
+        this.val = val;
     }
+
+    public Double convertToCAD(Double val){
+        return val * 1.43;
+        //USD to CAD keeps changing wtf so this is a placeholder
+    }
+
 
 }
