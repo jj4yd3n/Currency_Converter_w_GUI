@@ -149,7 +149,7 @@ public class GUI extends JFrame implements ActionListener {
 
 
     private String getMyStr() {
-        int myIndex = 0;
+        myIndex = 0;
         String myStr = "";
         for (int i = 0; i < WordleDictionary.FIVE_LETTER_WORDS.length; i++) {
             myIndex = (int) (Math.random() * WordleDictionary.FIVE_LETTER_WORDS.length);
