@@ -18,27 +18,29 @@ public class GUI extends JFrame implements ActionListener {
     int myIndex = 0;
 
 
-    public GUI() {
+
+
+    public GUI(){
 
         JButton button = new JButton("Submit");
         JButton button1 = new JButton("Clear");
         button.addActionListener(this);
         button1.addActionListener(this);
-        //bLabel = new JLabel("Multiply by 6!: 0");
+         //bLabel = new JLabel("Multiply by 6!: 0");
         bLabel = new JLabel("Welcome! Relax while we're settings things up for you. ");
         bLabel1 = new JLabel("to", SwingConstants.CENTER);
-        frame = new JFrame();
-        panel = new JPanel();
-        textField = new JTextField("enter name", 16);
+         frame = new JFrame();
+         panel = new JPanel();
+         textField = new JTextField("enter name",16);
 
-        String[] myArray = {"USD", "CAD", "PHP"};
-        bentoBox = new JComboBox<>(myArray);
-        caliBox = new JComboBox<>(myArray);
+         String[] myArray = {"USD", "CAD", "PHP"};
+          bentoBox = new JComboBox<>(myArray);
+          caliBox = new JComboBox<>(myArray);
         caliBox.setSelectedIndex(1);
 
 
-        panel.setBorder(BorderFactory.createEmptyBorder(20, 10, 20, 10));
-        panel.setLayout(new GridLayout(0, 1));
+        panel.setBorder(BorderFactory.createEmptyBorder(20,10,20,10));
+        panel.setLayout(new GridLayout(0,1));
         panel.add(textField);
         panel.add(bentoBox);
         panel.add(bLabel1);
@@ -49,7 +51,7 @@ public class GUI extends JFrame implements ActionListener {
 
         frame.add(panel, BorderLayout.CENTER);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setMinimumSize(new Dimension(500, 100));
+        frame.setMinimumSize(new Dimension(500,100));
         frame.setTitle("Adobe Photoshop 2016");
         frame.pack();
         frame.setVisible(true);
@@ -66,52 +68,21 @@ public class GUI extends JFrame implements ActionListener {
 
         String s = actionEvent.getActionCommand();
         //Print user's input from text field
-        if (s.equals("Submit")) {
-            //Check if user does not enter a number.
-            if (textField.getText() != null) {
+        if(s.equals("Submit")){
+            if(Double.parseDouble(textField.getText().trim()) >= 0) {
+                myInput = Double.parseDouble(textField.getText().trim());
+                bLabel.setText("You entered: " + myInput);
+            }
+            else if (Double.parseDouble(textField.getText().trim()) < 0){
+                bLabel.setText("Please enter a positive number!");
+            }
+            else{
                 bLabel.setText("Please enter a number!");
             }
         }
-        //Clear textbox
-        else if (s.equals("Clear")) {
+        else if(s.equals("Clear")){
             textField.setText("");
             bLabel.setText("Text successfully cleared!");
-        }
-
-        //Check if user entered a negative number
-        if (Double.parseDouble(textField.getText().trim()) < 0) {
-            bLabel.setText("Please enter a positive number!");
-        }
-
-        //Lines below are for currency conversion
-        myInput = Double.parseDouble(textField.getText().trim());
-        currencyConvert myConvert = new currencyConvert(myInput);
-
-
-        //Converting USD to any other currency
-        if (bentoBox.getSelectedItem().equals("USD") && (caliBox.getSelectedItem().equals("CAD"))) {
-            if (Double.parseDouble(textField.getText().trim()) > 0) {
-                bLabel.setText(myInput + "USD --> " + myConvert.convertUSDToCAD(myInput) + " CAD");
-            }
-        } else if (bentoBox.getSelectedItem().equals("USD") && caliBox.getSelectedItem().equals(("PHP"))) {
-            if (Double.parseDouble(textField.getText().trim()) > 0) {
-                bLabel.setText((myInput + " USD --> " + myConvert.convertUSDToPHP(myInput) + " PHP"));
-            }
-        } else if (bentoBox.getSelectedItem().equals("USD") && caliBox.getSelectedItem().equals("USD")) {
-            bLabel.setText("Cannot convert USD to USD!");
-        }
-
-        //Converting CAD to any other currency
-        if (bentoBox.getSelectedItem().equals("CAD") && caliBox.getSelectedItem().equals("USD")) {
-            if (Double.parseDouble(textField.getText().trim()) > 0) {
-                bLabel.setText((myInput + " CAD --> " + myConvert.convertCADtoUSD(myInput) + " USD"));
-            }
-        } else if (bentoBox.getSelectedItem().equals("CAD") && caliBox.getSelectedItem().equals("PHP")) {
-            if (Double.parseDouble(textField.getText().trim()) > 0) {
-                bLabel.setText((myInput + " CAD --> " + myConvert.convertCADtoPHP(myInput) + " PHP"));
-            }
-        } else if (bentoBox.getSelectedItem().equals("CAD") && caliBox.getSelectedItem().equals("CAD")) {
-            bLabel.setText("Cannot convert CAD to CAD!");
         }
 
 
@@ -123,6 +94,19 @@ public class GUI extends JFrame implements ActionListener {
         }
          */
 
+        if (caliBox.getSelectedItem().equals("CAD")){
+            if(Double.parseDouble(textField.getText().trim()) >= 0) {
+                myInput = Double.parseDouble(textField.getText().trim());
+                currencyConvert myConvert = new currencyConvert(myInput);
+                bLabel.setText(myInput + "USD --> " + myConvert.convertToCAD(myInput) + " CAD");
+            }
+            else if (Double.parseDouble(textField.getText().trim()) < 0){
+                bLabel.setText("Please enter a positive number!");
+            }
+            else{
+                bLabel.setText("Please enter a number!");
+            }
+        }
 
 
         //Testing if program can print something if a user enters a specific string.
