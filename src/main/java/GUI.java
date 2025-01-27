@@ -14,7 +14,6 @@ public class GUI extends JFrame implements ActionListener {
     private static JTextField textField;
     private static JComboBox bentoBox;
     private static JComboBox caliBox;
-    private Double myInput;
     int myIndex = 0;
 
 
@@ -36,7 +35,7 @@ public class GUI extends JFrame implements ActionListener {
          String[] myArray = {"USD", "CAD", "PHP"};
           bentoBox = new JComboBox<>(myArray);
           caliBox = new JComboBox<>(myArray);
-        caliBox.setSelectedIndex(1);
+         caliBox.setSelectedIndex(1);
 
 
         panel.setBorder(BorderFactory.createEmptyBorder(20,10,20,10));
@@ -69,15 +68,9 @@ public class GUI extends JFrame implements ActionListener {
         String s = actionEvent.getActionCommand();
         //Print user's input from text field
         if(s.equals("Submit")){
-            if(Double.parseDouble(textField.getText().trim()) >= 0) {
-                myInput = Double.parseDouble(textField.getText().trim());
-                bLabel.setText("You entered: " + myInput);
-            }
-            else if (Double.parseDouble(textField.getText().trim()) < 0){
-                bLabel.setText("Please enter a positive number!");
-            }
-            else{
-                bLabel.setText("Please enter a number!");
+            bLabel.setText("You entered: " + textField.getText());
+            if(Integer.parseInt(textField.getText()) == 52) {
+                bLabel.setText("Do you have any manners?");
             }
         }
         else if(s.equals("Clear")){
@@ -93,20 +86,6 @@ public class GUI extends JFrame implements ActionListener {
             bLabel.setText(("LIVE FROM NEW YORK, IT'S SATURDAY NIGHT!"));
         }
          */
-
-        if (caliBox.getSelectedItem().equals("CAD")){
-            if(Double.parseDouble(textField.getText().trim()) >= 0) {
-                myInput = Double.parseDouble(textField.getText().trim());
-                currencyConvert myConvert = new currencyConvert(myInput);
-                bLabel.setText(myInput + "USD --> " + myConvert.convertToCAD(myInput) + " CAD");
-            }
-            else if (Double.parseDouble(textField.getText().trim()) < 0){
-                bLabel.setText("Please enter a positive number!");
-            }
-            else{
-                bLabel.setText("Please enter a number!");
-            }
-        }
 
 
         //Testing if program can print something if a user enters a specific string.
@@ -142,8 +121,8 @@ public class GUI extends JFrame implements ActionListener {
         return myStr;
         }
         
-        public Double getTextField(){
-            return myInput;
+        public String getTextField(){
+            return textField.getText();
         }
     }
 
