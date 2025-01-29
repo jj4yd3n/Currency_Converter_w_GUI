@@ -23,22 +23,22 @@ public class currencyConvert {
         return val * cadRate;
        //ORIGINAL COMMENT: USD to CAD keeps changing wtf so this is a placeholder
          */
-        return val * getCAD();
+        return Math.round(val * getCAD() * 100) / 100.0;
     }
     public Double convertUSDToPHP(Double val){
         /*Old hardcoded exchange rate
         return val * 58.25;
          */
-        return val * getPHP();
+        return Math.round(val * getPHP() * 100) / 100.0;
     }
     public Double convertCADtoUSD(Double val){
         /*Old hardcoded exchange rate
         return val / cadRate;
          */
-        return val / getCAD();
+        return Math.round(val / getCAD() * 100) / 100.0;
     }
     public Double convertCADtoPHP(Double val){
-        return val * (getPHP() / getCAD());
+        return Math.round((val * (getPHP() / getCAD())) * 100) / 100.0;
     }
 
     public String getError(){
