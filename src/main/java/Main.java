@@ -10,7 +10,9 @@ public class Main {
     public static void main(String[] args) throws Exception {
         GUI myGUI = new GUI();
         currencyConvert currencyConvert = new currencyConvert(25.0);
-        System.out.println(currencyConvert.getCur());
+        //System.out.println(currencyConvert.getCur());
+
+
         /*Temp code to test calling FxRatesAPI
         try {
             String url = "https://api.fxratesapi.com/latest";

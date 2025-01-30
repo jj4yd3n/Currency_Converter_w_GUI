@@ -12,7 +12,7 @@ public class currencyConvert {
     private Double cadRate;
     private Double eurRate;
     private Double phpRate;
-    private String currency;
+    private String[] currency;
 
     public currencyConvert(Double val) {
         this.val = val;
@@ -61,7 +61,7 @@ public class currencyConvert {
         return rate;
     }
 
-    public String getCur() throws Exception{
+    public String[] getCur() throws Exception{
         String url = "https://api.fxratesapi.com/currencies";
         HttpClient client = HttpClient.newHttpClient();
         HttpRequest request = HttpRequest.newBuilder()
@@ -72,7 +72,7 @@ public class currencyConvert {
         String json = response.body();
         Gson gson = new Gson();
         JsonObject jsonObject = gson.fromJson(json, JsonObject.class);
-        currency = jsonObject.getAsJsonObject("code").getAsString();
+        currency = jsonObject.keySet().toArray(new String[0]);
         return currency;
     }
 

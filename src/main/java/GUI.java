@@ -18,7 +18,7 @@ public class GUI extends JFrame implements ActionListener {
     int myIndex = 0;
 
 
-    public GUI() {
+    public GUI() throws Exception {
 
         JButton button = new JButton("Submit");
         JButton button1 = new JButton("Clear");
@@ -31,7 +31,10 @@ public class GUI extends JFrame implements ActionListener {
         panel = new JPanel();
         textField = new JTextField("enter name", 16);
 
-        String[] myArray = {"USD", "CAD", "PHP"};
+        //OLD ARRAY
+        //String[] myArray = {"USD", "CAD", "PHP"};
+        currencyConvert myConvert = new currencyConvert(myInput);
+        String[] myArray = myConvert.getCur();
         bentoBox = new JComboBox<>(myArray);
         caliBox = new JComboBox<>(myArray);
         caliBox.setSelectedIndex(1);
