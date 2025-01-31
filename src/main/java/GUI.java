@@ -91,6 +91,8 @@ public class GUI extends JFrame implements ActionListener {
         currencyConvert myConvert = new currencyConvert(myInput);
 
 
+
+
         //Converting USD to any other currency
         if (bentoBox.getSelectedItem().equals("USD") && (caliBox.getSelectedItem().equals("CAD"))) {
             if (Double.parseDouble(textField.getText().trim()) > 0) {

@@ -10,6 +10,7 @@ public class Main {
     public static void main(String[] args) throws Exception {
         GUI myGUI = new GUI();
         currencyConvert currencyConvert = new currencyConvert(25.0);
+        System.out.println(currencyConvert.convert("USD", "CAD", 4500.0));
         //System.out.println(currencyConvert.getCur());
 
 
