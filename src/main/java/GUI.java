@@ -1,5 +1,8 @@
 import javax.swing.*;
 import java.awt.*;
+import java.awt.datatransfer.Clipboard;
+import java.awt.datatransfer.StringSelection;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import edu.willamette.cs1.wordle.WordleDictionary;
@@ -15,6 +18,7 @@ public class GUI extends JFrame implements ActionListener {
     private static JComboBox bentoBox;
     private static JComboBox caliBox;
     private Double myInput;
+    private Double result;
     int myIndex = 0;
 
 
@@ -22,10 +26,11 @@ public class GUI extends JFrame implements ActionListener {
 
         JButton button = new JButton("Submit");
         JButton button1 = new JButton("Clear");
+        JButton button2 = new JButton("Copy to clipboard");
         button.addActionListener(this);
         button1.addActionListener(this);
         //bLabel = new JLabel("Multiply by 6!: 0");
-        bLabel = new JLabel("Welcome! Relax while we're settings things up for you. ");
+        bLabel = new JLabel("Welcome! Relax while we're settings things up for you. ", SwingConstants.CENTER);
         bLabel1 = new JLabel("to", SwingConstants.CENTER);
         frame = new JFrame();
         panel = new JPanel();
@@ -48,12 +53,13 @@ public class GUI extends JFrame implements ActionListener {
         panel.add(caliBox);
         panel.add(button);
         panel.add(button1);
+        panel.add(button2);
         panel.add(bLabel);
 
         frame.add(panel, BorderLayout.CENTER);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setMinimumSize(new Dimension(500, 100));
-        frame.setTitle("Adobe Photoshop 2016");
+        frame.setTitle("iConvert");
         frame.pack();
         frame.setVisible(true);
 
@@ -80,6 +86,14 @@ public class GUI extends JFrame implements ActionListener {
             textField.setText("");
             bLabel.setText("Text successfully cleared!");
         }
+        //Copy to clipboard
+        else if (s.equals("Copy to clipboard")){
+            Double holycrap = 12.0;
+            Clipboard clip = Toolkit.getDefaultToolkit().getSystemClipboard();
+            StringSelection str1 = new StringSelection(holycrap.toString());
+            clip.setContents(str1, str1);
+            bLabel.setText("Copied to clipboard!");
+        }
 
         //Check if user entered a negative number
         if (Double.parseDouble(textField.getText().trim()) < 0) {
@@ -90,10 +104,19 @@ public class GUI extends JFrame implements ActionListener {
         myInput = Double.parseDouble(textField.getText().trim());
         currencyConvert myConvert = new currencyConvert(myInput);
 
-
+        //Converting currency using FxRatesAPI.
+        try {
+            if (Double.parseDouble(textField.getText().trim()) > 0) {
+                result = Math.round((myConvert.convert(bentoBox.getSelectedItem().toString(), caliBox.getSelectedItem().toString(), myInput) * 100)) / 100.0;
+                bLabel.setText(myInput + " " + bentoBox.getSelectedItem().toString() + " --> " + result + " " + caliBox.getSelectedItem().toString());
+            }
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
 
 
         //Converting USD to any other currency
+        /* OLD HARDCODED CONVERSION
         if (bentoBox.getSelectedItem().equals("USD") && (caliBox.getSelectedItem().equals("CAD"))) {
             if (Double.parseDouble(textField.getText().trim()) > 0) {
                 bLabel.setText(myInput + "USD --> " + myConvert.convertUSDToCAD(myInput) + " CAD");
@@ -118,7 +141,7 @@ public class GUI extends JFrame implements ActionListener {
         } else if (bentoBox.getSelectedItem().equals("CAD") && caliBox.getSelectedItem().equals("CAD")) {
             bLabel.setText("Cannot convert CAD to CAD!");
         }
-
+        */
 
 
         //Testing if program can print specific string based on what they chose from the drop-down menu.
@@ -152,7 +175,7 @@ public class GUI extends JFrame implements ActionListener {
 
 
 
-
+    /* Testing retrieving random string from library
     private String getMyStr() {
         myIndex = 0;
         String myStr = "";
@@ -162,6 +185,7 @@ public class GUI extends JFrame implements ActionListener {
         }
         return myStr;
         }
+       */
         
         public Double getTextField(){
             return myInput;

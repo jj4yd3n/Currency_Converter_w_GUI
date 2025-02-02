@@ -1,6 +1,5 @@
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
-
 import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
@@ -10,8 +9,11 @@ public class Main {
     public static void main(String[] args) throws Exception {
         GUI myGUI = new GUI();
         currencyConvert currencyConvert = new currencyConvert(25.0);
+
+        /*Testing methods
         System.out.println(currencyConvert.convert("USD", "CAD", 4500.0));
-        //System.out.println(currencyConvert.getCur());
+        System.out.println(currencyConvert.getCur());
+        */
 
 
         /*Temp code to test calling FxRatesAPI

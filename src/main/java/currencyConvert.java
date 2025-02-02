@@ -77,7 +77,7 @@ public class currencyConvert {
         return currency;
     }
 
-    //Call FxRates API to convert currency fro parameters.
+    //Call FxRates API to convert currency from parameters.
     public Double convert(String from, String to, Double amount) throws Exception{
         String url = "https://api.fxratesapi.com/convert?from=" + from + "&to=" + to + "&amount=" + amount + "&format=json";
         HttpClient client = HttpClient.newHttpClient();
