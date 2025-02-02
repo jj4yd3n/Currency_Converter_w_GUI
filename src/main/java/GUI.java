@@ -26,7 +26,7 @@ public class GUI extends JFrame implements ActionListener {
 
         JButton button = new JButton("Submit");
         JButton button1 = new JButton("Clear");
-        JButton button2 = new JButton("Copy to clipboard");
+        JButton button2 = new JButton("Copy");
         button.addActionListener(this);
         button1.addActionListener(this);
         //bLabel = new JLabel("Multiply by 6!: 0");
@@ -87,12 +87,10 @@ public class GUI extends JFrame implements ActionListener {
             bLabel.setText("Text successfully cleared!");
         }
         //Copy to clipboard
-        else if (s.equals("Copy to clipboard")){
-            Double holycrap = 12.0;
+        else if (s.equals("Copy")){
             Clipboard clip = Toolkit.getDefaultToolkit().getSystemClipboard();
-            StringSelection str1 = new StringSelection(holycrap.toString());
+            StringSelection str1 = new StringSelection("Testing");
             clip.setContents(str1, str1);
-            bLabel.setText("Copied to clipboard!");
         }
 
         //Check if user entered a negative number
@@ -111,7 +109,7 @@ public class GUI extends JFrame implements ActionListener {
                 bLabel.setText(myInput + " " + bentoBox.getSelectedItem().toString() + " --> " + result + " " + caliBox.getSelectedItem().toString());
             }
         } catch (Exception e) {
-            throw new RuntimeException(e);
+            JOptionPane.showMessageDialog(null, "Please connect to the internet!");
         }
 
 
