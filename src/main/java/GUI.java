@@ -5,11 +5,14 @@ import java.awt.datatransfer.StringSelection;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
+
 import edu.willamette.cs1.wordle.WordleDictionary;
 
 public class GUI extends JFrame implements ActionListener {
 
-    int count = 1;
+    //int count = 1;
     private static JLabel bLabel;
     private static JLabel bLabel1;
     private static JFrame frame;
@@ -19,14 +22,15 @@ public class GUI extends JFrame implements ActionListener {
     private static JComboBox caliBox;
     private Double myInput;
     private Double result;
-    int myIndex = 0;
+    private Double randNum;
+    private String focusMsg;
+    //int myIndex = 0;
 
 
     public GUI() throws Exception {
-
         JButton button = new JButton("Submit");
         JButton button1 = new JButton("Clear");
-        JButton button2 = new JButton("Copy");
+        JButton button2 = new JButton("Copy result");
         button.addActionListener(this);
         button1.addActionListener(this);
         //bLabel = new JLabel("Multiply by 6!: 0");
@@ -34,7 +38,28 @@ public class GUI extends JFrame implements ActionListener {
         bLabel1 = new JLabel("to", SwingConstants.CENTER);
         frame = new JFrame();
         panel = new JPanel();
-        textField = new JTextField("enter name", 16);
+        textField = new JTextField(focusMsg, 16);
+
+        randNum = (double) Math.round((Math.random() * (250.75 - 1.25 + 1) + 1.25) * 100) / 100;
+        focusMsg = "Try entering " + randNum + "!";
+
+        textField.addFocusListener(new FocusListener() {
+            @Override
+            public void focusGained(FocusEvent focusEvent) {
+                if(textField.getText().equals(focusMsg)){
+                    textField.setText("");
+                }
+            }
+
+            @Override
+            public void focusLost(FocusEvent focusEvent) {
+                if (textField.getText().equals("")){
+                    textField.setText(focusMsg);
+                }
+            }
+        });
+
+
 
         //OLD ARRAY
         //String[] myArray = {"USD", "CAD", "PHP"};
@@ -53,8 +78,8 @@ public class GUI extends JFrame implements ActionListener {
         panel.add(caliBox);
         panel.add(button);
         panel.add(button1);
-        panel.add(button2);
         panel.add(bLabel);
+        panel.add(button2);
 
         frame.add(panel, BorderLayout.CENTER);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -77,17 +102,22 @@ public class GUI extends JFrame implements ActionListener {
         //Print user's input from text field
         if (s.equals("Submit")) {
             //Check if user does not enter a number.
-            if (textField.getText() != null) {
+            if(textField.getText().equals(focusMsg)){
+                bLabel.setText("Oops! Seems like you forgot to delete the text before " + randNum + "!");
+            }
+            else if (textField.getText() != null) {
                 bLabel.setText("Please enter a number!");
             }
         }
         //Clear textbox
         else if (s.equals("Clear")) {
-            textField.setText("");
-            bLabel.setText("Text successfully cleared!");
+            if(!(textField.equals(focusMsg))) {
+                textField.setText("");
+                bLabel.setText("Text successfully cleared!");
+            }
         }
         //Copy to clipboard
-        else if (s.equals("Copy")){
+        else if (s.equals("Copy result")){
             Clipboard clip = Toolkit.getDefaultToolkit().getSystemClipboard();
             StringSelection str1 = new StringSelection("Testing");
             clip.setContents(str1, str1);
@@ -106,7 +136,7 @@ public class GUI extends JFrame implements ActionListener {
         try {
             if (Double.parseDouble(textField.getText().trim()) > 0) {
                 result = Math.round((myConvert.convert(bentoBox.getSelectedItem().toString(), caliBox.getSelectedItem().toString(), myInput) * 100)) / 100.0;
-                bLabel.setText(myInput + " " + bentoBox.getSelectedItem().toString() + " --> " + result + " " + caliBox.getSelectedItem().toString());
+                bLabel.setText("Result: " + result + " " + caliBox.getSelectedItem().toString());
             }
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Please connect to the internet!");
@@ -173,6 +203,9 @@ public class GUI extends JFrame implements ActionListener {
 
 
 
+
+
+
     /* Testing retrieving random string from library
     private String getMyStr() {
         myIndex = 0;
@@ -188,5 +221,19 @@ public class GUI extends JFrame implements ActionListener {
         public Double getTextField(){
             return myInput;
         }
+
+        /* Method to retrieve focus message
+        public String getfocusMsg(){
+            randNum = (double) Math.round((Math.random() * (250.75 - 1.25 + 1) + 1.25) * 100) / 100;
+            return "Try entering " + randNum + "!";
+        }
+         */
+
+        /* Retrieve random Double
+        public Double getrandNum(){
+            randNum = (double) Math.round((Math.random() * (250.75 - 1.25 + 1) + 1.25) * 100) / 100;
+                    return randNum;
+        }
+         */
     }
 
