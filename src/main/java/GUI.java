@@ -8,11 +8,9 @@ import java.awt.event.ActionListener;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 
-import edu.willamette.cs1.wordle.WordleDictionary;
-
 public class GUI extends JFrame implements ActionListener {
 
-    //int count = 1;
+
     private static JLabel bLabel;
     private static JLabel bLabel1;
     private static JFrame frame;
@@ -24,7 +22,7 @@ public class GUI extends JFrame implements ActionListener {
     private Double result;
     private Double randNum;
     private String focusMsg;
-    //int myIndex = 0;
+
 
 
     public GUI() throws Exception {
@@ -33,7 +31,6 @@ public class GUI extends JFrame implements ActionListener {
         JButton button2 = new JButton("Copy result");
         button.addActionListener(this);
         button1.addActionListener(this);
-        //bLabel = new JLabel("Multiply by 6!: 0");
         bLabel = new JLabel("Welcome! Relax while we're settings things up for you. ", SwingConstants.CENTER);
         bLabel1 = new JLabel("to", SwingConstants.CENTER);
         frame = new JFrame();
@@ -59,10 +56,6 @@ public class GUI extends JFrame implements ActionListener {
             }
         });
 
-
-
-        //OLD ARRAY
-        //String[] myArray = {"USD", "CAD", "PHP"};
         currencyConvert myConvert = new currencyConvert(myInput);
         String[] myArray = myConvert.getCur();
         bentoBox = new JComboBox<>(myArray);
@@ -92,11 +85,6 @@ public class GUI extends JFrame implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent actionEvent) {
-        //count *= 6;
-        //bLabel.setText("Multiply by 6! \n" + count);
-
-        //Display random ass string
-        //bLabel.setText("Word of the day: " + getMyStr());
 
         String s = actionEvent.getActionCommand();
         //Print user's input from text field
@@ -141,99 +129,6 @@ public class GUI extends JFrame implements ActionListener {
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Please connect to the internet!");
         }
-
-
-        //Converting USD to any other currency
-        /* OLD HARDCODED CONVERSION
-        if (bentoBox.getSelectedItem().equals("USD") && (caliBox.getSelectedItem().equals("CAD"))) {
-            if (Double.parseDouble(textField.getText().trim()) > 0) {
-                bLabel.setText(myInput + "USD --> " + myConvert.convertUSDToCAD(myInput) + " CAD");
-            }
-        } else if (bentoBox.getSelectedItem().equals("USD") && caliBox.getSelectedItem().equals(("PHP"))) {
-            if (Double.parseDouble(textField.getText().trim()) > 0) {
-                bLabel.setText((myInput + " USD --> " + myConvert.convertUSDToPHP(myInput) + " PHP"));
-            }
-        } else if (bentoBox.getSelectedItem().equals("USD") && caliBox.getSelectedItem().equals("USD")) {
-            bLabel.setText("Cannot convert USD to USD!");
-        }
-
-        //Converting CAD to any other currency
-        if (bentoBox.getSelectedItem().equals("CAD") && caliBox.getSelectedItem().equals("USD")) {
-            if (Double.parseDouble(textField.getText().trim()) > 0) {
-                bLabel.setText((myInput + " CAD --> " + myConvert.convertCADtoUSD(myInput) + " USD"));
-            }
-        } else if (bentoBox.getSelectedItem().equals("CAD") && caliBox.getSelectedItem().equals("PHP")) {
-            if (Double.parseDouble(textField.getText().trim()) > 0) {
-                bLabel.setText((myInput + " CAD --> " + myConvert.convertCADtoPHP(myInput) + " PHP"));
-            }
-        } else if (bentoBox.getSelectedItem().equals("CAD") && caliBox.getSelectedItem().equals("CAD")) {
-            bLabel.setText("Cannot convert CAD to CAD!");
-        }
-        */
-
-
-        //Testing if program can print specific string based on what they chose from the drop-down menu.
-        /*
-        if(caliBox.getSelectedItem().equals("PHP")){
-            bLabel.setText(("LIVE FROM NEW YORK, IT'S SATURDAY NIGHT!"));
-        }
-         */
-
-
-
-        //Testing if program can print something if a user enters a specific string.
-        /*
-        if(s.equals("Submit")){
-            if(textField.getText().equals("HOLY CRAP!!"))
-            {
-                bLabel.setText("YOU WEREN'T SUPPOSED TO FIND THIS!");
-            }
-        }
-        */
-
-        //Clear text
-        /*
-        else if(s.equals("Clear")){
-            textField.setText("");
-            bLabel.setText("Text successfully cleared!");
-        }
-         */
     }
-
-
-
-
-
-
-
-    /* Testing retrieving random string from library
-    private String getMyStr() {
-        myIndex = 0;
-        String myStr = "";
-        for (int i = 0; i < WordleDictionary.FIVE_LETTER_WORDS.length; i++) {
-            myIndex = (int) (Math.random() * WordleDictionary.FIVE_LETTER_WORDS.length);
-            myStr = WordleDictionary.FIVE_LETTER_WORDS[myIndex];
-        }
-        return myStr;
-        }
-       */
-        
-        public Double getTextField(){
-            return myInput;
-        }
-
-        /* Method to retrieve focus message
-        public String getfocusMsg(){
-            randNum = (double) Math.round((Math.random() * (250.75 - 1.25 + 1) + 1.25) * 100) / 100;
-            return "Try entering " + randNum + "!";
-        }
-         */
-
-        /* Retrieve random Double
-        public Double getrandNum(){
-            randNum = (double) Math.round((Math.random() * (250.75 - 1.25 + 1) + 1.25) * 100) / 100;
-                    return randNum;
-        }
-         */
-    }
+}
 

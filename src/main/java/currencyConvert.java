@@ -8,9 +8,6 @@ import javax.swing.JOptionPane;
 
 public class currencyConvert {
     private Double val;
-    private Double cadRate;
-    private Double eurRate;
-    private Double phpRate;
     private String[] currency;
     private Double result;
     private Double rate;
@@ -19,28 +16,6 @@ public class currencyConvert {
         this.val = val;
     }
 
-    /* OLD METHODS
-    public Double convertUSDToCAD(Double val){
-        /*Old hardcoded exchange rate
-        return val * cadRate;
-       //ORIGINAL COMMENT: USD to CAD keeps changing wtf so this is a placeholder
-
-        return Math.round(val * getCAD() * 100) / 100.0;
-    }
-    public Double convertUSDToPHP(Double val){
-        /*Old hardcoded exchange rate
-        return val * 58.25;
-        return Math.round(val * getPHP() * 100) / 100.0;
-    }
-    public Double convertCADtoUSD(Double val){
-        /*Old hardcoded exchange rate
-        return val / cadRate;
-        return Math.round(val / getCAD() * 100) / 100.0;
-    }
-    public Double convertCADtoPHP(Double val){
-        return Math.round((val * (getPHP() / getCAD())) * 100) / 100.0;
-    }
-    */
     public String getError(){
         return "Please enter capitalized 3 character currency or connect to the internet.";
     }
@@ -104,37 +79,4 @@ public class currencyConvert {
         }
         return result;
     }
-
-/* Retrieving exchange rates from API
-    public Double getCAD(){
-        try {
-            cadRate = getRate("CAD");
-        } catch (Exception e) {
-            System.out.println("Please enter capitalized 3 character currency or connect to the internet.");
-        }
-        return cadRate;
-    } //Retrieve CAD exchange rate from API
-
-    public Double getEUR(){
-        try{
-             eurRate = getRate("EUR");
-        }
-        catch(Exception e){
-            System.out.println("Please enter capitalized 3 character currency or connect to the internet.");
-        }
-        return eurRate;
-    } //Retrieve EUR exchange rate from API
-
-    public Double getPHP(){
-        try{
-            phpRate = getRate("PHP");
-        }
-        catch(Exception e){
-            System.out.println("Please enter capitalized 3 character currency or connect to the internet.");
-        }
-        return phpRate;
-    } //Retrieve PHP exchange rate from API
- */
-
-
 }
